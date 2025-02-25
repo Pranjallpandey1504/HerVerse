@@ -2,7 +2,6 @@
 
 Welcome to **HerVerse**, a platform designed to support and empower women in various aspects of life, including **fitness, finance, safety, legal rights, and sisterhood**. 🚀  
 
-🔗 **Live Demo:** [HerVerse Deployment Link](#)  
 
 ## ⚠️ Project Status  
 HerVerse is **not fully developed yet** but open for contributions!  
