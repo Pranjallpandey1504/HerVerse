@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Safety - HerVerse</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; color: #d63384; margin: 0; }
+        nav { background-color: #d63384; padding: 15px; }
+        nav a { color: white; text-decoration: none; margin: 0 10px; font-weight: bold; }
+        .container { margin: 50px auto; padding: 20px; max-width: 600px; border: 2px solid #d63384; border-radius: 10px; }
+        .btn { background: #d63384; color: white; padding: 10px 15px; border: none; cursor: pointer; margin-top: 15px; border-radius: 5px; }
+        footer { background: #2b2729; color: white; padding: 10px; position: fixed; width: 100%; bottom: 0; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/fitness">Fitness</a>
+        <a href="/safety">Safety</a>
+        <a href="/sisterhood">Sisterhood</a>
+        <a href="/finance">Finance</a>
+    </nav>
+
+    <div class="container">
+        <h1>Women Safety</h1>
+        <p>Live tracking, emergency signal alerts, and self-defense guides.</p>
+        <button class="btn">Send SOS Alert</button>
+        <button class="btn">Live Tracking</button>
+    </div>
+
+    <script>
+        // Function to send SOS alert
+        function sendSOS() {
+            fetch('/send-sos', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(error => console.error('Error:', error));
+        }
+    
+        // Function to start live tracking
+        function startLiveTracking() {
+            if (navigator.geolocation) {
+                navigator.geolocation.watchPosition(position => {
+                    fetch('/update-location', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ lat: position.coords.latitude, lng: position.coords.longitude })
+                    });
+                });
+                alert('Live Tracking Activated!');
+            } else {
+                alert('Geolocation is not supported.');
+            }
+        }
+    
+        document.querySelectorAll('.btn')[0].addEventListener('click', sendSOS);
+        document.querySelectorAll('.btn')[1].addEventListener('click', startLiveTracking);
+
+    </script>
+    
+
+    <footer>
+        &copy; 2025 HerVerse. All rights reserved.
+    </footer>
+</body>
+</html>

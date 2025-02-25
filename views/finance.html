@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Education - HerVerse</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; color: #d63384; margin: 0; }
+        nav { background-color: #d63384; padding: 15px; }
+        nav a { color: white; text-decoration: none; margin: 0 10px; font-weight: bold; }
+        .container { margin: 50px auto; padding: 20px; max-width: 800px; border: 2px solid #d63384; border-radius: 10px; }
+        .btn { background: #d63384; color: white; padding: 10px 15px; border: none; cursor: pointer; margin-top: 15px; border-radius: 5px; transition: background 0.3s; }
+        .btn:hover { background: #a12465; }
+        footer { background: #2b2729; color: white; padding: 10px; position: fixed; width: 100%; bottom: 0; }
+        .list-container { display: none; text-align: left; padding: 20px; }
+        .course-container { display: none; text-align: center; padding: 20px; }
+        
+        /* Additional styles for centering */
+        .center-text {
+            text-align: center;
+        }
+        
+        .video-container {
+            text-align: center;
+        }
+        
+        .course {
+            display: inline-block;
+            margin: 10px;
+            padding: 20px;
+            border: 1px solid #d63384;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        
+        .course:hover {
+            background: #f0f0f0; /* Light gray background on hover */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Add a subtle shadow */
+        }
+        
+        .course img {
+            width: 200px;
+            height: 150px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .course h3 {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .course p {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/fitness">Fitness</a>
+        <a href="/safety">Safety</a>
+        <a href="/sisterhood">Sisterhood</a>
+        <a href="/finance">Finance</a>
+    </nav>
+
+    <div class="container">
+        <h1>Financial Education</h1>
+        <p>Learn about finance, stocks, and investing for a secure future.</p>
+        <button class="btn" onclick="showYouTubeVideos()">Start Learning</button>
+        <button class="btn" onclick="showCourses()">Join a Course</button>
+    </div>
+
+    <div id="videoList" class="list-container">
+        <h1 class="center-text">Watch Finance Videos</h1>
+        <p class="center-text">Follow along with these videos to learn finance!</p>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen style="margin: 10px;"></iframe>
+            <iframe src="https://www.youtube.com/embed/A7r2vCxa3pI?si=PhTbVvPG_UKonXEs"   allowfullscreen style="margin: 10px;"></iframe>
+            <iframe src="https://www.youtube.com/embed/z8dcZvTHmj0?si=wEL7i2QRJHJCZ7bV"  allowfullscreen style="margin: 10px;"></iframe>
+        </div>
+    </div>
+
+    <div id="courseList" class="course-container">
+        <h2>Paid Finance Courses</h2>
+        <div class="course">
+            <img src="images/course1.jpg" alt="Personal Finance Mastery">
+            <h3>Personal Finance Mastery</h3>
+            <p>Instructor: Jane Doe</p>
+            <p>Duration: 4 Weeks</p>
+            <p>Price: $50</p>
+        </div>
+        <div class="course">
+            <img src="images/course2.jpg" alt="Stock Market Investing">
+            <h3>Stock Market Investing</h3>
+            <p>Instructor: John Smith</p>
+            <p>Duration: 6 Weeks</p>
+            <p>Price: $75</p>
+        </div>
+        <div class="course">
+            <img src="images/course3.jpg" alt="Financial Planning for Women">
+            <h3>Financial Planning for Women</h3>
+            <p>Instructor: Emily Johnson</p>
+            <p>Duration: 5 Weeks</p>
+            <p>Price: $60</p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 HerVerse. All rights reserved.
+    </footer>
+
+    <script>
+        function showYouTubeVideos() {
+            document.getElementById('videoList').style.display = 'block';
+            document.getElementById('courseList').style.display = 'none';
+        }
+
+        function showCourses() {
+            document.getElementById('courseList').style.display = 'block';
+            document.getElementById('videoList').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

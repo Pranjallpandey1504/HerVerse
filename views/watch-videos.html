@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Fitness Videos - HerVerse</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            color: #d63384;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #d63384;
+            padding: 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        .container {
+            margin: 50px auto;
+            padding: 20px;
+            max-width: 800px;
+        }
+        .video-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        iframe {
+            width: 100%;
+            max-width: 560px;
+            height: 315px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 3px 3px 15px rgba(214, 51, 132, 0.2);
+        }
+        .btn {
+            background: #d63384;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+        footer {
+            background: #2b2729;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/fitness">Fitness</a>
+        <a href="/safety">Safety</a>
+        <a href="/sisterhood">Sisterhood</a>
+        <a href="/finance">Finance</a>
+    </nav>
+
+    <div class="container">
+        <h1>Watch Fitness Videos</h1>
+        <p>Follow along with these workouts to stay fit and fabulous!</p>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/W4eKVKwf3rQ?si=D7LliysLNNq6vgXf" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/T4ddQcGStws?si=4IKWND6vXlhQb1K0" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/UItWltVZZmE" allowfullscreen></iframe>
+        </div>
+        <button class="btn" onclick="window.location.href='fitness-tracker.html'">Back to Fitness Tracker</button>
+    </div>
+
+    <footer>
+        &copy; 2025 HerVerse. All rights reserved.
+    </footer>
+</body>
+</html>

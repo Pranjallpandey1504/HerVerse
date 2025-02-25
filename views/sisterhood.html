@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sisterhood - HerVerse</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; color: #d63384; margin: 0; }
+        nav { background-color: #d63384; padding: 15px; }
+        nav a { color: white; text-decoration: none; margin: 0 10px; font-weight: bold; }
+        .container { margin: 50px auto; padding: 20px; max-width: 600px; border: 2px solid #d63384; border-radius: 10px; }
+        .btn { background: #d63384; color: white; padding: 10px 15px; border: none; cursor: pointer; margin-top: 15px; border-radius: 5px; }
+        footer { background: #2b2729; color: white; padding: 10px; position: fixed; width: 100%; bottom: 0; }
+        .modal, .comment-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.3); }
+        .modal input, .modal textarea, .comment-modal textarea { width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #d63384; border-radius: 5px; }
+        .close { background: #d63384; color: white; padding: 5px 10px; border: none; cursor: pointer; border-radius: 5px; margin-top: 10px; }
+        .forum { margin-top: 20px; text-align: left; padding: 10px; border-top: 2px solid #d63384; }
+        .forum-item { border-bottom: 1px solid #d63384; padding: 10px; cursor: pointer; }
+        .like-btn, .comment-btn { background: #d63384; color: white; padding: 5px 10px; border: none; cursor: pointer; border-radius: 5px; margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/fitness">Fitness</a>
+        <a href="/safety">Safety</a>
+        <a href="/sisterhood">Sisterhood</a>
+        <a href="/finance">Finance</a>
+    </nav>
+
+    <div class="container">
+        <h1>Sisterhood Forum</h1>
+        <p>A safe space for open discussions about women’s issues.</p>
+        <button class="btn" onclick="openModal()">Ask a Question</button>
+        <button class="btn" onclick="showDiscussions()">Join Conversations</button>
+    </div>
+
+    <div id="questionModal" class="modal">
+        <h2>Ask a Question</h2>
+        <input type="text" id="questionInput" placeholder="Enter your question">
+        <textarea id="descriptionInput" placeholder="Describe your question..."></textarea>
+        <button class="btn" onclick="submitQuestion()">Submit</button>
+        <button class="close" onclick="closeModal()">Close</button>
+    </div>
+
+    <div id="commentModal" class="comment-modal">
+        <h2>Add a Comment</h2>
+        <textarea id="commentInput" placeholder="Write your comment..."></textarea>
+        <button class="btn" onclick="submitComment()">Submit</button>
+        <button class="close" onclick="closeCommentModal()">Close</button>
+    </div>
+
+    <div class="container forum" id="forumSection">
+        <h2>Forum Discussions</h2>
+        <ul id="forumList"></ul>
+    </div>
+
+    <footer>
+        &copy; 2025 HerVerse. All rights reserved.
+    </footer>
+
+    <script>
+        let selectedDiscussion = null;
+        
+        function openModal() {
+            document.getElementById('questionModal').style.display = 'block';
+        }
+        function closeModal() {
+            document.getElementById('questionModal').style.display = 'none';
+        }
+        function submitQuestion() {
+            let question = document.getElementById('questionInput').value;
+            let description = document.getElementById('descriptionInput').value;
+            if (question.trim() !== "") {
+                let forumList = document.getElementById('forumList');
+                let listItem = document.createElement('li');
+                listItem.className = 'forum-item';
+                listItem.innerHTML = `<strong>${question}</strong><p>${description}</p>
+                                     <button class='like-btn' onclick='likePost(this)'>Like (0)</button>
+                                     <button class='comment-btn' onclick='openCommentModal(this)'>Comment</button>
+                                     <ul class='comments'></ul>`;
+                forumList.appendChild(listItem);
+                closeModal();
+                document.getElementById('questionInput').value = "";
+                document.getElementById('descriptionInput').value = "";
+            }
+        }
+        function showDiscussions() {
+            document.getElementById('forumSection').scrollIntoView({ behavior: 'smooth' });
+        }
+        function likePost(button) {
+            let count = parseInt(button.innerText.match(/\d+/)[0]);
+            button.innerText = `Like (${count + 1})`;
+        }
+        function openCommentModal(button) {
+            selectedDiscussion = button.parentElement;
+            document.getElementById('commentModal').style.display = 'block';
+        }
+        function closeCommentModal() {
+            document.getElementById('commentModal').style.display = 'none';
+        }
+        function submitComment() {
+            let commentText = document.getElementById('commentInput').value;
+            if (commentText.trim() !== "" && selectedDiscussion) {
+                let commentList = selectedDiscussion.querySelector('.comments');
+                let commentItem = document.createElement('li');
+                commentItem.innerText = commentText;
+                commentList.appendChild(commentItem);
+                closeCommentModal();
+                document.getElementById('commentInput').value = "";
+            }
+        }
+    </script>
+</body>
+</html>

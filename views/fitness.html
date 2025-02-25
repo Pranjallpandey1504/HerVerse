@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fit & Fabulous - HerVerse</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            color: #d63384;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #d63384;
+            padding: 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        .container {
+            margin: 50px auto;
+            padding: 20px;
+            max-width: 600px;
+            border: 2px solid #d63384;
+            border-radius: 10px;
+            box-shadow: 3px 3px 15px rgba(214, 51, 132, 0.2);
+        }
+        .btn {
+            background: #d63384;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+        .todo-list {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .task {
+            display: flex;
+            justify-content: space-between;
+            background: #f8d7da;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .completed {
+            background: #d4edda !important;
+            text-decoration: line-through;
+        }
+        footer {
+            background: #2b2729;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/fitness">Fitness</a>
+        <a href="/safety">Safety</a>
+        <a href="/sisterhood">Sisterhood</a>
+        <a href="/finance">Finance</a>
+    </nav>
+
+    <div class="container">
+        <h1>Fit & Fabulous</h1>
+        <p>Access fitness videos, diet recipes, and daily workout routines.</p>
+        <button class="btn" onclick="showToDo()">Upload Your Routine</button>
+        <button class="btn" onclick="window.location.href='/watch-videos'">Watch Videos</button>
+    </div>
+
+    <div class="container todo-list" id="todoSection" style="display:none;">
+        <h2>Workout Planner</h2>
+        <input type="text" id="taskInput" placeholder="Enter workout task...">
+        <button class="btn" onclick="addTask()">Add Task</button>
+        <h3>Pending Tasks</h3>
+        <ul id="pendingTasks"></ul>
+        <h3>Completed Tasks</h3>
+        <ul id="completedTasks"></ul>
+        <canvas id="progressChart" width="400" height="200"></canvas>
+    </div>
+
+    <footer>
+        &copy; 2025 HerVerse. All rights reserved.
+    </footer>
+
+    <script>
+        function showToDo() {
+            document.getElementById("todoSection").style.display = "block";
+        }
+        
+        let tasks = [];
+        let myChart;
+
+        function addTask() {
+            let taskInput = document.getElementById("taskInput").value;
+            if (taskInput === "") return;
+            
+            let taskObj = { text: taskInput, completed: false };
+            tasks.push(taskObj);
+            document.getElementById("taskInput").value = "";
+            renderTasks();
+        }
+
+        function toggleTask(index) {
+            tasks[index].completed = !tasks[index].completed;
+            renderTasks();
+        }
+
+        function renderTasks() {
+            let pendingList = document.getElementById("pendingTasks");
+            let completedList = document.getElementById("completedTasks");
+            pendingList.innerHTML = "";
+            completedList.innerHTML = "";
+            
+            tasks.forEach((task, index) => {
+                let li = document.createElement("li");
+                li.textContent = task.text;
+                li.className = "task";
+                if (task.completed) {
+                    li.classList.add("completed");
+                    completedList.appendChild(li);
+                } else {
+                    li.onclick = () => toggleTask(index);
+                    pendingList.appendChild(li);
+                }
+            });
+            updateChart();
+        }
+        
+        function updateChart() {
+            let completed = tasks.filter(task => task.completed).length;
+            let pending = tasks.length - completed;
+            let ctx = document.getElementById("progressChart").getContext("2d");
+
+            if (myChart) {
+                myChart.destroy(); // Destroy the previous chart instance
+            }
+            
+            myChart = new Chart(ctx, {
+                type: "doughnut",
+                data: {
+                    labels: ["Completed", "Pending"],
+                    datasets: [{
+                        data: [completed, pending],
+                        backgroundColor: ["#28a745", "#ffc107"]
+                    }]
+                }
+            });
+        }
+    </script>
+</body>
+</html>

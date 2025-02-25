@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - HerVerse</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: #d63384;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        nav {
+            width: 100%;
+            background-color: #d63384;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        .edit-profile-container {
+            max-width: 400px;
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #d63384;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(214, 51, 132, 0.2);
+            margin: 50px auto;
+            background: white;
+        }
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #d63384;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .edit-btn {
+            background-color: #d63384;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .edit-btn:hover {
+            background-color: #b62a6e;
+        }
+        .form-field {
+            margin-bottom: 15px;
+        }
+        footer {
+            width: 100%;
+            background-color: #2b2729;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/profile">Profile</a>
+    </nav>
+
+    <div class="edit-profile-container">
+        <img id="profile-pic" src="images/profile.jpg" alt="Profile Picture" class="profile-pic">
+        <form id="edit-profile-form" enctype="multipart/form-data">
+            <div class="form-field">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="name" required>
+            </div>
+            <div class="form-field">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-field">
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-field">
+                <label for="bio">Bio:</label>
+                <textarea id="bio" name="bio" rows="4" cols="30"></textarea>
+            </div>
+            <div class="form-field">
+                <label for="profile-pic-input">Update Profile Picture:</label>
+                <input type="file" id="profile-pic-input" name="profilePic" accept="image/*">
+            </div>
+            <button class="edit-btn" type="submit">Save Changes</button>
+        </form>
+    </div>
+
+    <footer>
+        &copy; 2025 HerVerse. All rights reserved.
+    </footer>
+
+    <script>
+        // Fetch current profile data to populate form fields
+        fetch('/get-profile')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('username').value = data.name || '';
+                document.getElementById('email').value = data.email || '';
+                document.getElementById('phone').value = data.phone || '';
+                document.getElementById('bio').value = data.bio || '';
+                if (data.profilePic) {
+                    document.getElementById('profile-pic').src = data.profilePic;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+
+        // Handle form submission
+        document.getElementById('edit-profile-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/edit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Profile updated:', data);
+                window.location.href = "/profile.html";
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

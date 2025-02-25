@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - HerVerse</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: #d63384;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        nav {
+            width: 100%;
+            background-color: #d63384;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        .profile-container {
+            max-width: 400px;
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #d63384;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(214, 51, 132, 0.2);
+            margin: 50px auto;
+            background: white;
+        }
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #d63384;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .edit-btn {
+            background-color: #d63384;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .edit-btn:hover {
+            background-color: #b62a6e;
+        }
+        .details {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        footer {
+            width: 100%;
+            background-color: #2b2729;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/profile">Profile</a>
+    </nav>
+
+    <div class="profile-container">
+        <img id="profile-pic" src="images/profile.jpg" alt="Profile Picture" class="profile-pic">
+        <h2 id="username">Your Name</h2>
+        <p class="details"><strong>Email:</strong> <span id="email">your.email@example.com</span></p>
+        <p class="details"><strong>Phone:</strong> <span id="phone">+91 9876543210</span></p>
+        <p class="details"><strong>Bio:</strong> <span id="bio">Passionate about women's empowerment, tech, and community building!</span></p>
+        <button class="edit-btn" onclick="editProfile()">Edit Profile</button>
+    </div>
+
+    <footer>
+        &copy; 2025 HerVerse. All rights reserved.
+    </footer>
+
+    <script>
+        function fetchProfile() {
+            fetch('/get-profile')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('username').textContent = data.name || 'Your Name';
+                    document.getElementById('email').textContent = data.email || 'your.email@example.com';
+                    document.getElementById('phone').textContent = data.phone || '+91 9876543210';
+                    document.getElementById('bio').textContent = data.bio || 'Passionate about women\'s empowerment, tech, and community building!';
+                    if (data.profilePic) {
+                        document.getElementById('profile-pic').src = data.profilePic;
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function editProfile() {
+    window.location.href = "/edit";
+}
+
+
+        fetchProfile();
+    </script>
+</body>
+</html>
