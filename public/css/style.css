@@ -30,26 +30,16 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 100vh;
     text-align: center;
-    background: url('/images/herobg.jpg') center/cover no-repeat;
+    background: url('/images/background.jpg') center/cover no-repeat;
     background-size: cover;
     background-position: center;
     width: 100%;
     position: relative;
 }
 
-.hero-content {
-    max-width: 800px;
-    padding: 20px;
-    border-radius: 10px;
-    color: white; 
-    background: rgba(255, 105, 180, 0.3); /* Light pink background */
-    padding: 10px 20px;
-    border-radius: 8px;
-    display: inline-block;
-    
-}
+
 
 .hero h1, .hero p {
     color: white !important; 
@@ -57,8 +47,10 @@ body {
 }
 
 .btn {
+    position: absolute;
+    bottom: 190px;  /* Adjust vertical positioning */
+    right: 90px;   /* Adjust horizontal positioning */
     display: inline-block;
-    margin-top: 15px;
     padding: 10px 20px;
     background-color: #d63384;
     color: white;
