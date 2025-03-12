@@ -48,8 +48,8 @@ body {
 
 .btn {
     position: absolute;
-    bottom: 190px;  /* Adjust vertical positioning */
-    right: 90px;   /* Adjust horizontal positioning */
+    bottom: 190px;  
+    right: 90px;   
     display: inline-block;
     padding: 10px 20px;
     background-color: #d63384;
