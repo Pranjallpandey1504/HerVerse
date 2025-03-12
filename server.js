@@ -7,8 +7,8 @@ const twilio = require("twilio");
 const multer = require("multer");
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // For parsing form data
-app.use(express.static("public")); // Serve static files like CSS and images
+app.use(express.urlencoded({ extended: true })); 
+app.use(express.static("public")); 
 
 // MongoDB Connection
 mongoose.connect("mongodb://localhost:27017/herverse", {
@@ -115,8 +115,7 @@ app.post("/edit", upload.single("profilePic"), async (req, res) => {
     try {
         const { name, email, phone, bio } = req.body;
         const profilePic = req.file ? req.file.filename : null;
-        // Assuming you're updating the first user in the database
-        // Modify this logic to securely update the correct user based on authentication
+       
         const updatedUser = await User.updateOne({}, 
             { name, email, phone, bio, profilePic },
             { upsert: true }
