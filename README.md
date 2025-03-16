@@ -29,6 +29,6 @@ We welcome contributions from the community! 🌍 If you're interested in contri
 4. Submit a pull request ✅  
 
 ## 📢 Contact  
-Since we **do not have social media accounts yet**, stay tuned for updates!  
+Since we **do not have social media accounts yet**, stay tuned for updates!!!  
 
 💜 **Join us in creating a supportive digital space for women!**  
